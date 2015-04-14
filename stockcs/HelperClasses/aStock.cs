@@ -45,9 +45,6 @@ namespace stockcs.HelperClasses
             MONTHLY
         };
 
-
-
-
         /// <summary>
         /// Read from a csv file
         /// </summary>
@@ -55,8 +52,6 @@ namespace stockcs.HelperClasses
         {
             List<aCandlestick> Candlestick = new List<aCandlestick>();
             string filePath = "";
-            // try
-            //{
             switch (PeriodType)
             {
                 case aPeriodType.DAILY:
@@ -98,19 +93,7 @@ namespace stockcs.HelperClasses
                     }
                 }
             }
-            //This will poopulate the candlestick this foreach was to test the reasults. 
-            //foreach (var item in Candlestick)
-            //{
-            //    MessageBox.Show(item.Open.ToString() + item.High.ToString() + item.Low.ToString() + item.Close.ToString() + item.Volume.ToString() + item.StartingDate.ToShortDateString());
-            //}
             return Candlestick;
-
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Error: readFromFile");
-            //    throw;
-            //}
         }
 
         /// <summary>
@@ -141,7 +124,7 @@ namespace stockcs.HelperClasses
                 //Queries sendQuery = new Queries();
 
                 //Check to see if directories exist before they written to
-                //veriflyDirectories();
+                veriflyDirectories();
                 switch (PeriodType)
                 {
                     case aPeriodType.DAILY:
@@ -173,6 +156,39 @@ namespace stockcs.HelperClasses
             catch (Exception e)
             {
                 MessageBox.Show("Error: writeToFile | " + e.ToString());
+            }
+        }
+        
+        /// <summary>
+        /// Check if directories exists to store the results of the YQL query
+        /// </summary>
+        public void veriflyDirectories()
+        {
+
+            try
+            {
+                string dailyPath = @"C:\DEV\STOCKDATA\Daily\";
+                string weeklyPath = @"C:\DEV\STOCKDATA\Weekly\";
+                string monthlyPath = @"C:\DEV\STOCKDATA\Monthly\";
+
+                //Check if directory exists to save the YQL query
+                //IF Directory does not exist, create that dirc
+                if (!Directory.Exists(dailyPath))
+                {
+                    Directory.CreateDirectory(dailyPath);
+                }
+                if (!Directory.Exists(weeklyPath))
+                {
+                    Directory.CreateDirectory(weeklyPath);
+                }
+                if (!Directory.Exists(monthlyPath))
+                {
+                    Directory.CreateDirectory(monthlyPath);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: QueryFileHander.veriflyDirectories\n" + e);
             }
         }
     }
