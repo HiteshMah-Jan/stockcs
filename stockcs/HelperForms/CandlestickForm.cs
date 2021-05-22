@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
+// This should get caught in disciplinaryEmployeeWarning ie: Disciplinary Records
+
 namespace stockcs.HelperForms
 {
     public partial class CandlestickForm : Form
